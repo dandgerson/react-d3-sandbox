@@ -1,30 +1,30 @@
 import React, { useEffect, useRef } from 'react'
 import classNames from 'classnames'
-import * as d3 from 'd3'
 
-import { fetchCSVData } from '../../helpers'
 import renderChart from './renderChart'
 
 import style from './BarChart.module.scss'
 
-const BarChart = ({ dataPath, ...props}) => {
-  const svgRef = useRef(null)
-
+const BarChart = ({ dataPath, ...props }) => {
+  const refs = {
+   svg: useRef(null)
+  }
   useEffect(() => {
-    const data = fetchCSVData(dataPath)
-    renderChart(data, svgRef)
-  }, [dataPath])
-  
-  const data = fetchCSVData(dataPath)
-  console.log({data})
+    renderChart(dataPath, refs)
+  }, [dataPath, refs])
   return (
     <div
       className={classNames(
         style.root,
       )}
     >
+      <h1>Bar chart</h1>
       <svg
-        ref={svgRef}
+        ref={refs.svg}
+        // style={{
+        //   width: '100%',
+        //   height: '100%',
+        // }}
       >
 
       </svg>

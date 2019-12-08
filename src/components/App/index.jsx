@@ -5,6 +5,7 @@ import style from './styles/App.module.scss'
 // import theme from './styles/theme-default.module.scss'
 
 import BarChart from '../BarChart'
+import barChartData from '../../data/bar-chart-data.csv'
 
 const App = () => (
   <div
@@ -15,7 +16,7 @@ const App = () => (
   >
     <div className="row">
       <div className="col">
-        <BarChart dataPath={'/data/bar-chart-data.csv'} />
+        <BarChart dataPath={barChartData} />
     </div>
     </div>
   </div>
