@@ -2,7 +2,7 @@ import * as d3 from 'd3'
 
 import {
   simpleCompose,
-} from 'src/helpers'
+} from '../../helpers'
 
 const renderChart = (data, svgRef) => simpleCompose(
 
