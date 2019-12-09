@@ -1,8 +1,13 @@
 import * as d3 from 'd3'
 
+export const rowConverter = (d, i, self) => ({
+  [self[0]]: d[self[0]],
+  [self[1]]: +d[self[1]],
+})
+
 export const logger = ({ data, svg, width, height }) => {
-  console.log({data})
-  console.log({ width, height})
+  console.log('logger:', {data})
+  console.log('logger:', { width, height})
 }
 
 export const drawRects = ({ data, svg, width, height }) => {

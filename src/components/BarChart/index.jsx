@@ -1,18 +1,29 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import classNames from 'classnames'
 
+import { fetchCSVData } from 'helpers'
+import { rowConverter } from './helpers'
 import renderChart from './renderChart'
 
 import style from './BarChart.module.scss'
 
 const BarChart = ({ dataPath, ...props }) => {
+  const [ data, setData ] = useState([]) 
   const refs = {
    svg: useRef(null)
   }
+
   useEffect(() => {
-    renderChart(dataPath, refs)
-  }, [dataPath, refs])
-  return (
+    fetchCSVData(dataPath, rowConverter, setData)
+  }, [dataPath])
+
+  useEffect(() => {
+    data.length && renderChart(data, refs)
+  }, [data, refs])
+
+  console.log({data})
+
+  return data.length && (
     <div
       className={classNames(
         style.root,
@@ -21,10 +32,6 @@ const BarChart = ({ dataPath, ...props }) => {
       <h1>Bar chart</h1>
       <svg
         ref={refs.svg}
-        // style={{
-        //   width: '100%',
-        //   height: '100%',
-        // }}
       >
 
       </svg>
