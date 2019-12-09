@@ -7,13 +7,17 @@ import {
 import {
   logger,
   drawRects,
+  drawLabels,
 } from './helpers'
 
-const renderChart = (data, refs, setData) => simpleCompose(
+const renderChart = (data, refs, elems, setData) => simpleCompose(
   logger,
   drawRects,
+  drawLabels,
 )({
   data,
+  refs,
+  elems,
   svg: d3.select(refs.svg.current),
 
   get width() {

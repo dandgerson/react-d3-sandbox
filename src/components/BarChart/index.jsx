@@ -8,9 +8,13 @@ import renderChart from './renderChart'
 import style from './BarChart.module.scss'
 
 const BarChart = ({ dataPath, ...props }) => {
-  const [ data, setData ] = useState([]) 
+  const [data, setData] = useState([])
   const refs = {
-   svg: useRef(null)
+    svg: useRef(null),
+  }
+  const elems = {
+    bars: [],
+    labels: [],
   }
 
   useEffect(() => {
@@ -18,10 +22,10 @@ const BarChart = ({ dataPath, ...props }) => {
   }, [dataPath])
 
   useEffect(() => {
-    data.length && renderChart(data, refs)
-  }, [data, refs])
+    data.length && renderChart(data, refs, elems)
+  }, [data, refs, elems])
 
-  console.log({data})
+  // console.log({data})
 
   return data.length && (
     <div
@@ -29,11 +33,28 @@ const BarChart = ({ dataPath, ...props }) => {
         style.root,
       )}
     >
-      <h1>Bar chart</h1>
+      <h1>Bar - chart</h1>
       <svg
         ref={refs.svg}
       >
-
+        {data.map((d, i) => (
+          <g key={i}>
+            <text
+              ref={(elem) => elem && elems.labels.push(elem)}
+              className={classNames(
+                style.label,
+              )}
+            >
+              {`${d.mount / 1000}k`}
+            </text>
+            <rect
+              ref={(elem) => elem && elems.bars.push(elem)}
+              className={classNames(
+                style.bar,
+              )}
+            />
+          </g>
+        ))}
       </svg>
     </div>
   )
